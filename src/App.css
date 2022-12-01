@@ -1,0 +1,25 @@
+.appContainer {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.nextButton {
+  margin-top: 10px;
+  width: 300px;
+  margin-bottom: 10px;
+}
+
+.imageRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.gameSelect {
+  width: 400px;
+}
