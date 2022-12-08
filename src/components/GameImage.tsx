@@ -10,8 +10,8 @@ const GameImage = (props: GameImageProps) => {
     <div style={{ padding: "0 20px" }}>
       <ImagePixelated
         src={`https://cors-anywhere.herokuapp.com/http:${props.gameImg}`}
-        width={300}
-        height={300}
+        width={500}
+        height={500}
         pixelSize={props.size}
         fillTransparencyColor={"grey"}
       />

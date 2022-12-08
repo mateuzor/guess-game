@@ -8,26 +8,10 @@ function App() {
   const [games, setGames] = useState<GameType[]>([]);
   const [gameID, setgameID] = useState<number>();
   const [cover, setCover] = useState<string>("");
-  const [pixelSize, setPixelSize] = useState(20);
+  const [pixelSize, setPixelSize] = useState(0);
 
   useEffect(() => {
-    fetch(
-      "https://cors-anywhere.herokuapp.com/http://api.igdb.com/v4/covers/?fields=id,game,url;limit 500",
-      {
-        method: "POST",
-        headers: {
-          "Client-ID": "hocbgvticdyx9v5ftmk7zp55e3lqnf",
-          Authorization: `Bearer tbus7j13k4572mi8i87umhpjr5pq61`,
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setCover(data[0].url);
-        setgameID(data[0].game);
-      });
+    onResetGame();
   }, []);
 
   const onChange = (value: string) => {
@@ -64,14 +48,40 @@ function App() {
       });
   };
 
+  const onResetGame = () => {
+    fetch(
+      "https://cors-anywhere.herokuapp.com/http://api.igdb.com/v4/covers/?fields=id,game,url;limit500",
+      {
+        method: "POST",
+        headers: {
+          "Client-ID": "hocbgvticdyx9v5ftmk7zp55e3lqnf",
+          Authorization: `Bearer tbus7j13k4572mi8i87umhpjr5pq61`,
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        const randomNumber = Math.floor(Math.random() * 10);
+        setCover(data[randomNumber].url);
+        setgameID(data[randomNumber].game);
+      });
+  };
+
   return (
     <div className="appContainer">
-      <Button disabled size="large" className="nextButton">
-        Next Game
+      <Button
+        disabled
+        size="large"
+        className="nextButton"
+        onClick={() => onResetGame()}
+      >
+        Reset Game
       </Button>
       <Row className="imageRow">
         <GameImage gameImg={cover} size={pixelSize} />
-        {gameID}
       </Row>
       <br />
       <Row>
